@@ -1,0 +1,210 @@
+### Через функцию ###
+
+# from control.matlab import *
+# import matplotlib.pyplot as plt
+#
+# def Lab1(num11, den11, num21, den21):
+#    w11= tf(num11, den11)
+#    w21= tf(num21, den21)
+#    y11,x11=step(w11)
+#    y21,x21=step(w21)
+#    plt.plot(x11,y11,"r", label='Исходная')
+#    plt.plot(x21,y21,"b", label='Увеличенная k и уменшенная Т')
+#    plt.title('Переходная функция') 
+#    plt.ylabel('Амплитуда')
+#    plt.xlabel('Время(с)')
+#    plt.legend(loc='upper right')
+#    plt.grid(True)
+#    plt.show()
+#
+#    y11,x11=impulse(w11)
+#    y21,x21=impulse(w21)
+#    plt.plot(x11,y11,"r", label='Исходная')
+#    plt.plot(x21,y21,"b", label='Увеличенная k и уменшенная Т')
+#    plt.title('Импульсная функция') 
+#    plt.ylabel('Амплитуда')
+#    plt.xlabel('Время(с)')
+#    plt.legend(loc='upper right')
+#    plt.grid(True)
+#    plt.show()
+#
+#    mag, phase, omega = bode(w11, w21, dB=False)
+#    plt.plot()
+#    plt.show()
+#   print(w11, w21)
+
+########### Напрямую ################
+
+from control.matlab import *
+import matplotlib.pyplot as plt
+import numpy
+
+num11= [4.]
+den11= [0.1e-100,1.]
+num21= [8.]
+den21= [0.1e-100,1.]
+w11= tf(num11, den11)
+w21= tf(num21, den21)
+y11,x11=step(w11)
+y21,x21=step(w21)
+x11=numpy.linspace(0, 18, num=100)
+x21=numpy.linspace(0, 18, num=100)
+plt.axis([0, 18, 0, 8.5])
+plt.plot(x11,y11,"r", label='Исходная')
+plt.plot(x21,y21,"b", label='Увеличенная k и уменшенная Т')
+plt.title('Переходная функция безынерционное звена') 
+plt.ylabel('Амплитуда')
+plt.xlabel('Время(с)')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
+
+y11,x11=impulse(w11)
+y21,x21=impulse(w21)
+plt.plot(x11,y11,"r", label='Исходная')
+plt.plot(x21,y21,"b", label='Увеличенная k и уменшенная Т')
+plt.title('Импульсная функция безынерционное звена') 
+plt.ylabel('Амплитуда')
+plt.xlabel('Время(с)')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
+
+mag, phase, omega = bode(w11, w21, dB=False)
+plt.plot()
+plt.show()
+print(w11, w21)
+
+
+num12= [2.]
+den12= [4.,1]
+num22= [4.]
+den22= [2.,1]
+w12= tf(num12, den12)
+w22= tf(num22, den22)
+y12,x12=step(w12)
+y22,x22=step(w22)
+plt.plot(x12,y12,"r", label='Исходная')
+plt.plot(x22,y22,"b", label='Увеличенная k и уменшенная Т')
+plt.title('Переходная функция апериодического звена') 
+plt.ylabel('Амплитуда')
+plt.xlabel('Время(с)')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
+
+y12,x12=impulse(w12)
+y22,x22=impulse(w22)
+plt.plot(x12,y12,"r", label='Исходная')
+plt.plot(x22,y22,"b", label='Увеличенная k и уменшенная Т')
+plt.title('Импульсная функция апериодического звена') 
+plt.ylabel('Амплитуда')
+plt.xlabel('Время(с)')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
+
+mag, phase, omega = bode(w12, w22, dB=False)
+plt.plot()
+plt.show()
+print(w12, w22)
+
+
+num13= [1.]
+den13= [1.,0]
+num23= [2.]
+den23= [1.,0]
+w13= tf(num13, den13)
+w23= tf(num23, den23)
+y13,x13=step(w13)
+y23,x23=step(w23)
+plt.plot(x13,y13,"r", label='Исходная')
+plt.plot(x23,y23,"b", label='Увеличенная k и уменшенная Т')
+plt.title('Переходная функция интегрирующего звена') 
+plt.ylabel('Амплитуда')
+plt.xlabel('Время(с)')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
+
+y13,x13=impulse(w13)
+y23,x23=impulse(w23)
+plt.plot(x13,y13,"r", label='Исходная')
+plt.plot(x23,y23,"b", label='Увеличенная k и уменшенная Т')
+plt.title('Импульсная функция интегрирующего звена') 
+plt.ylabel('Амплитуда')
+plt.xlabel('Время(с)')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
+
+mag, phase, omega = bode(w13, w23, dB=False)
+plt.plot()
+plt.show()
+print(w13, w23)
+
+num14= [2.,0]
+den14= [0.1e-100,1.]
+num24= [4.,0]
+den24= [0.1e-100,1.]
+w14= tf(num14, den14)
+w24= tf(num24, den24)
+y14,x14=step(w14)
+y24,x24=step(w24)
+plt.plot(x14,y14,"r", label='Исходная')
+plt.plot(x24,y24,"b", label='Увеличенная k и уменшенная Т')
+plt.title('Переходная функция идеального дифференцирующего звена') 
+plt.ylabel('Амплитуда')
+plt.xlabel('Время(с)')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
+
+y14,x14=impulse(w14)
+y24,x24=impulse(w24)
+plt.plot(x14,y14,"r", label='Исходная')
+plt.plot(x24,y24,"b", label='Увеличенная k и уменшенная Т')
+plt.title('Импульсная функция идеального дифференцирующего звена') 
+plt.ylabel('Амплитуда')
+plt.xlabel('Время(с)')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
+
+mag, phase, omega = bode(w14, w24, dB=False)
+plt.plot()
+plt.show()
+print(w14, w24)
+
+num15= [2.,0]
+den15= [2.,1.]
+num25= [4.,0]
+den25= [1.,1.]
+w15= tf(num15, den15)
+w25= tf(num25, den25)
+y15,x15=step(w15)
+y25,x25=step(w25)
+plt.plot(x15,y15,"r", label='Исходная')
+plt.plot(x25,y25,"b", label='Увеличенная k и уменшенная Т')
+plt.title('Переходная функция реального дифференцирующего звена') 
+plt.ylabel('Амплитуда')
+plt.xlabel('Время(с)')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
+
+y15,x15=impulse(w15)
+y25,x25=impulse(w25)
+plt.plot(x15,y15,"r", label='Исходная')
+plt.plot(x25,y25,"b", label='Увеличенная k и уменшенная Т')
+plt.title('Импульсная функция реального дифференцирующего звена') 
+plt.ylabel('Амплитуда')
+plt.xlabel('Время(с)')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
+
+mag, phase, omega = bode(w15, w25, dB=False)
+plt.plot()
+plt.show()
+print(w15, w25)
