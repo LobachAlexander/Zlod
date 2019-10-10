@@ -1,0 +1,43 @@
+import control.matlab as c
+from control.matlab import *
+import matplotlib.pyplot as plt
+from sympy import *
+from sympy import I
+from numpy import arange
+
+W1 = c.tf([18, 2], [1, 0])
+W2 = c.tf(3, [0.3, 1])
+W3 = c.tf(2.6, [4, 1])
+K1 = 13
+K2 = 5
+
+W4 = W1 * W2
+W5 = K2 / W1
+W6 = W4 * W3
+W7 = W6 / (1 + W6 / W3)
+W8 = W5 * W7
+W9 = W7 + K1
+W10 = 1 / (1 - W8)
+W11 = W9 * W10
+
+pzmap(W11)
+plt.title("Расположение полюсов на комплексной плоскости")
+plt.grid(True)
+plt.show()
+
+w = symbols("w", real=True)
+s = I * w
+z = factor(252.3*s**13 + 94480*s**12 + 9207000*s**11 + 68090000*s**10 + 165700000*s**9 +
+            142700000*s**8 + 62920000*s**7 + 16570000*s**6 + 2781000*s**5 + 296200*s**4 +
+            18220*s**3 + 486.7*s**2 + 0 + 0)
+zR = re(z)
+zIm = im(z)
+x = [zR.subs({w: q}) for q in arange(0, 100, 0.1)]
+y = [zIm.subs({w: q}) for q in arange(0, 100, 0.1)]
+plt.title("Годограф Михайлова")
+plt.axis([-15, 10, -15, 15])
+plt.plot(x, y)
+plt.grid(True)
+plt.show()
+
+print(W11)
